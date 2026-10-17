@@ -70,6 +70,7 @@
                 <li><button onclick="showSection('symptoms')" class="nav-btn text-gray-600 hover:text-blue-800 transition" data-target="symptoms" data-i18n="nav-symptoms">الأعراض</button></li>
                 <li><button onclick="showSection('treatment')" class="nav-btn text-gray-600 hover:text-blue-800 transition" data-target="treatment" data-i18n="nav-treatment">العلاج</button></li>
                 <li><button onclick="showSection('prevention')" class="nav-btn text-gray-600 hover:text-blue-800 transition" data-target="prevention" data-i18n="nav-prevention">الوقاية</button></li>
+                <li><button onclick="showSection('feedback')" class="nav-btn text-gray-600 hover:text-blue-800 transition" data-target="feedback">التقييم</button></li>
             </ul>
         </nav>
     </header>
@@ -297,6 +298,17 @@
             </div>
         </section>
 
+        <!-- نافذة التقييم -->
+        <section id="feedback" class="section-content fade-in">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100 text-center">
+                <h2 class="text-2xl font-bold text-blue-900 mb-4">تقييم الموقع</h2>
+                <p class="text-gray-700 mb-6">رأيك يهمنا! ساعدنا في تحسين المحتوى من خلال تقييمك للموقع.</p>
+                
+                <div class="flex justify-center w-full overflow-hidden rounded-lg border">
+                    <iframe src="https://forms.gle/FvbtActjKX9VvWDWA" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">جاري التحميل…</iframe>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- الفوتر (تذييل الصفحة) -->
