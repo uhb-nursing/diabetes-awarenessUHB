@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التوعية بمرض السكري | Diabetes Awareness</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* تنسيق البطاقات التفاعلية */
+        .start-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .start-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- شريط التنقل والترويسة -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <!-- قسم تغيير اللغة والشعار -->
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center border-b">
+            <button id="lang-toggle" onclick="toggleLanguage()" class="text-sm font-semibold text-blue-600 hover:text-blue-800 transition bg-blue-50 px-3 py-1 rounded-full">
+                English
+            </button>
+            <div class="text-center flex flex-col items-center">
+                <!-- لتغيير الشعار، استبدل "image.png" برابط صورتك الجديدة إذا أردت -->
+                <img src="image.png" alt="شعار الجامعة" class="h-16 object-contain mb-1" onerror="this.src='https://via.placeholder.com/150x60?text=University+Logo'">
+                <h2 class="text-sm font-bold text-blue-900" data-i18n="nursing-college">كلية التمريض</h2>
+            </div>
+            <div class="w-16"></div> <!-- عنصر فارغ لضبط المسافات -->
+        </div>
+
+        <!-- القائمة الرئيسية للتنقل -->
+        <nav class="container mx-auto px-4 py-3 overflow-x-auto">
+            <ul class="flex space-x-6 space-x-reverse justify-center min-w-max" id="nav-menu">
+                <li><button onclick="showSection('home')" class="nav-btn text-blue-600 font-bold hover:text-blue-800 transition" data-target="home" data-i18n="nav-home">الرئيسية</button></li>
+                <li><button onclick="showSection('what-is')" class="nav-btn text-gray-600 hover:text-blue-800 transition" data-target="what-is" data-i18n="nav-what-is">ما هو السكري؟</button></li>
+                <li><button onclick="showSection('types')" class="nav-btn text-gray-600 hover:text-blue-800 transition" data-target="types" data-i18n="nav-types">الأنواع</button></li>
+                <li><button onclick="showSection('causes')" class="nav-btn text-gray-600 hover:text-blue-800 transition" data-target="causes" data-i18n="nav-causes">الأسباب</button></li>
+                <li><button onclick="showSection('symptoms')" class="nav-btn text-gray-600 hover:text-blue-800 transition" data-target="symptoms" data-i18n="nav-symptoms">الأعراض</button></li>
+                <li><button onclick="showSection('treatment')" class="nav-btn text-gray-600 hover:text-blue-800 transition" data-target="treatment" data-i18n="nav-treatment">العلاج</button></li>
+                <li><button onclick="showSection('prevention')" class="nav-btn text-gray-600 hover:text-blue-800 transition" data-target="prevention" data-i18n="nav-prevention">الوقاية</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- المحتوى الرئيسي للموقع -->
+    <main class="container mx-auto px-4 py-8 max-w-5xl">
+
+        <!-- 1. نافذة: الرئيسية -->
+        <section id="home" class="section-content active fade-in">
+            <div class="text-center mb-10">
+                <h1 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4" data-i18n="home-title">الدليل الشامل للتوعية بمرض السكري</h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-i18n="home-subtitle">نحو حياة صحية وواعية، اكتشف المعلومات الأساسية للوقاية والتعايش بأمان.</p>
+            </div>
+
+            <!-- رسالتنا -->
+            <div class="bg-blue-50 rounded-xl p-8 mb-12 text-center border border-blue-100 shadow-sm">
+                <h2 class="text-2xl font-bold text-blue-800 mb-4 flex items-center justify-center gap-2">
+                    <span data-i18n="mission-title">رسالتنا</span>
+                </h2>
+                <p class="text-gray-700 text-lg leading-relaxed max-w-3xl mx-auto" data-i18n="mission-text">
+                    من مقاعد الدراسة إلى خدمة المجتمع؛ صُمم هذا الموقع بيد طلاب مادة 'تمريض صحة المجتمع' كتكليف تخرج يجسد رسالتنا التوعوية. نسعى من خلاله لتقديم المعرفة اللازمة لدعم الوقاية والفهم المبكر لمرض السكري، لأن وعيك اليوم هو حصانة لصحتك غداً.
+                </p>
+            </div>
+
+            <!-- من أين تحب أن تبدأ؟ -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold text-blue-900 mb-6 text-center" data-i18n="where-to-start">من أين تحب أن تبدأ؟</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <div class="start-card bg-white rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-blue-800 mb-2" data-i18n="card1-title">ما هو السكري؟</h3>
+                            <p class="text-gray-600 text-sm mb-4" data-i18n="card1-desc">تعريف بسيط للسكري وكيف يتحول الطعام إلى طاقة.</p>
+                        </div>
+                        <button onclick="showSection('what-is')" class="text-blue-600 font-bold flex items-center gap-1 hover:text-blue-800" data-i18n="read-more">اقرأ المزيد &larr;</button>
+                    </div>
+
+                    <div class="start-card bg-white rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-blue-800 mb-2" data-i18n="card2-title">الأنواع</h3>
+                            <p class="text-gray-600 text-sm mb-4" data-i18n="card2-desc">شرح واضح للنوع الأول والثاني وسكري الحمل.</p>
+                        </div>
+                        <button onclick="showSection('types')" class="text-blue-600 font-bold flex items-center gap-1 hover:text-blue-800" data-i18n="read-more">اقرأ المزيد &larr;</button>
+                    </div>
+
+                    <div class="start-card bg-white rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-blue-800 mb-2" data-i18n="card3-title">الأسباب وعوامل الخطر</h3>
+                            <p class="text-gray-600 text-sm mb-4" data-i18n="card3-desc">العوامل الوراثية وعوامل نمط الحياة التي ترفع خطر الإصابة.</p>
+                        </div>
+                        <button onclick="showSection('causes')" class="text-blue-600 font-bold flex items-center gap-1 hover:text-blue-800" data-i18n="read-more">اقرأ المزيد &larr;</button>
+                    </div>
+
+                    <div class="start-card bg-white rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-blue-800 mb-2" data-i18n="card4-title">الأعراض</h3>
+                            <p class="text-gray-600 text-sm mb-4" data-i18n="card4-desc">علامات الإنذار المبكرة التي تستحق الانتباه.</p>
+                        </div>
+                        <button onclick="showSection('symptoms')" class="text-blue-600 font-bold flex items-center gap-1 hover:text-blue-800" data-i18n="read-more">اقرأ المزيد &larr;</button>
+                    </div>
+
+                    <div class="start-card bg-white rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-blue-800 mb-2" data-i18n="card5-title">العلاج</h3>
+                            <p class="text-gray-600 text-sm mb-4" data-i18n="card5-desc">الأدوية والمتابعة والتغذية والإدارة اليومية.</p>
+                        </div>
+                        <button onclick="showSection('treatment')" class="text-blue-600 font-bold flex items-center gap-1 hover:text-blue-800" data-i18n="read-more">اقرأ المزيد &larr;</button>
+                    </div>
+
+                    <div class="start-card bg-white rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-blue-800 mb-2" data-i18n="card6-title">الوقاية</h3>
+                            <p class="text-gray-600 text-sm mb-4" data-i18n="card6-desc">عادات عملية تقلل خطر إصابتك مدى الحياة.</p>
+                        </div>
+                        <button onclick="showSection('prevention')" class="text-blue-600 font-bold flex items-center gap-1 hover:text-blue-800" data-i18n="read-more">اقرأ المزيد &larr;</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- فيديو وزارة الصحة -->
+            <div class="mt-12 bg-white rounded-xl shadow-sm overflow-hidden border">
+                <div class="bg-blue-600 text-white p-4">
+                    <h3 class="text-xl font-bold" data-i18n="video-title">فيديو توعوي من وزارة الصحة</h3>
+                </div>
+                <div class="p-4 aspect-w-16 aspect-h-9 flex justify-center bg-gray-100">
+                    <!-- 
+                        يمكنك تعديل رابط فيديو وزارة الصحة من هنا
+                        حالياً تم وضع فيديو توضيحي كمثال من يوتيوب.
+                        لتغييره، قم بتبديل الرابط داخل src=""
+                    -->
+                    <iframe class="w-full md:w-3/4 h-64 md:h-96 rounded-lg shadow" 
+                            src="https://www.youtube.com/embed/5a8b7U67D8s" 
+                            title="فيديو التوعية" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. نافذة: ما هو السكري؟ -->
+        <section id="what-is" class="section-content fade-in">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+                <h2 class="text-2xl font-bold text-blue-900 mb-4" data-i18n="nav-what-is">ما هو السكري؟</h2>
+                <p class="text-gray-700 leading-relaxed mb-4" data-i18n="whatis-p1">مرض السكري هو حالة صحية مزمنة تؤثر على كيفية تحويل الجسم للطعام إلى طاقة. يكسر جسمك معظم الطعام الذي تتناوله إلى سكر (جلوكوز) ويطلقه في مجرى الدم.</p>
+                <p class="text-gray-700 leading-relaxed" data-i18n="whatis-p2">عندما يرتفع مستوى السكر في الدم، يرسل إشارة للبنكرياس لإفراز الأنسولين. الأنسولين يعمل كمفتاح للسماح للسكر في الدم بالدخول إلى خلايا الجسم لاستخدامه كطاقة. في حالة مرض السكري، لا يصنع الجسم ما يكفي من الأنسولين أو لا يستطيع استخدامه بشكل جيد.</p>
+            </div>
+        </section>
+
+        <!-- 3. نافذة: الأنواع -->
+        <section id="types" class="section-content fade-in">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+                <h2 class="text-2xl font-bold text-blue-900 mb-6" data-i18n="nav-types">أنواع مرض السكري</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2" data-i18n="type1-title">النوع الأول</h3>
+                        <p class="text-gray-700 text-sm" data-i18n="type1-desc">يعتقد أنه تفاعل مناعي ذاتي يمنع الجسم من إنتاج الأنسولين. يتم تشخيصه غالباً عند الأطفال والمراهقين.</p>
+                    </div>
+                    <div class="bg-teal-50 p-6 rounded-lg border border-teal-100">
+                        <h3 class="font-bold text-lg text-teal-800 mb-2" data-i18n="type2-title">النوع الثاني</h3>
+                        <p class="text-gray-700 text-sm" data-i18n="type2-desc">النوع الأكثر شيوعاً، حيث لا يستخدم الجسم الأنسولين بشكل جيد. يرتبط غالباً بنمط الحياة والوزن.</p>
+                    </div>
+                    <div class="bg-purple-50 p-6 rounded-lg border border-purple-100">
+                        <h3 class="font-bold text-lg text-purple-800 mb-2" data-i18n="type3-title">سكري الحمل</h3>
+                        <p class="text-gray-700 text-sm" data-i18n="type3-desc">يحدث لدى النساء الحوامل اللاتي لم يسبق لهن الإصابة بالسكري، ويزيد من خطر الإصابة بالنوع الثاني لاحقاً.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. نافذة: الأسباب -->
+        <section id="causes" class="section-content fade-in">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+                <h2 class="text-2xl font-bold text-blue-900 mb-4" data-i18n="nav-causes">الأسباب وعوامل الخطر</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-3 mt-4">
+                    <li data-i18n="cause1">زيادة الوزن والسمنة المفرطة.</li>
+                    <li data-i18n="cause2">الخمول وقلة النشاط البدني.</li>
+                    <li data-i18n="cause3">التاريخ العائلي والوراثة.</li>
+                    <li data-i18n="cause4">العمر (يزداد الخطر مع تقدم العمر).</li>
+                    <li data-i18n="cause5">ارتفاع ضغط الدم ونسبة الكوليسترول.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 5. نافذة: الأعراض (تم تخصيصها بدقة حسب طلبك) -->
+        <section id="symptoms" class="section-content fade-in">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-blue-900 mb-2" data-i18n="symp-main-title">الأعراض المبكرة وعلامات التحذير</h2>
+                    <p class="text-gray-600" data-i18n="symp-subtitle">قد تتطور الأعراض ببطء ويسهل تجاهلها. إذا ظهرت عدة من هذه العلامات معاً، يُنصح بشدة بمراجعة الطبيب.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg border">
+                        <div class="bg-blue-100 text-blue-600 p-2 rounded-full text-xl">💧</div>
+                        <span class="text-gray-800 font-semibold" data-i18n="symp1">العطش المفرط وجفاف الفم المستمر</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg border">
+                        <div class="bg-blue-100 text-blue-600 p-2 rounded-full text-xl">🚻</div>
+                        <span class="text-gray-800 font-semibold" data-i18n="symp2">كثرة التبول، خاصة الاستيقاظ ليلاً</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg border">
+                        <div class="bg-blue-100 text-blue-600 p-2 rounded-full text-xl">🥱</div>
+                        <span class="text-gray-800 font-semibold" data-i18n="symp3">التعب المستمر الذي لا يتناسب مع المجهود</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg border">
+                        <div class="bg-blue-100 text-blue-600 p-2 rounded-full text-xl">👁️</div>
+                        <span class="text-gray-800 font-semibold" data-i18n="symp4">تشوش أو ضبابية مؤقتة في الرؤية</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg border">
+                        <div class="bg-blue-100 text-blue-600 p-2 rounded-full text-xl">⚖️</div>
+                        <span class="text-gray-800 font-semibold" data-i18n="symp5">فقدان مفاجئ وغير مبرر للوزن (شائع في النوع الأول)</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg border">
+                        <div class="bg-blue-100 text-blue-600 p-2 rounded-full text-xl">🩹</div>
+                        <span class="text-gray-800 font-semibold" data-i18n="symp6">الجروح والخدوش التي تلتئم ببطء</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-red-50 text-red-800 rounded-lg border border-red-200">
+                    <p class="font-semibold text-sm text-center" data-i18n="symp-alert">ملاحظة: هذه العلامات بمفردها لا تؤكد الإصابة بالسكري - فحص الدم هو الوسيلة الوحيدة للتشخيص، لكنها إشارة واضحة لضرورة الفحص.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. نافذة: العلاج -->
+        <section id="treatment" class="section-content fade-in">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+                <h2 class="text-2xl font-bold text-blue-900 mb-4" data-i18n="nav-treatment">طرق العلاج والإدارة</h2>
+                <p class="text-gray-700 mb-4" data-i18n="treat-p1">يختلف العلاج باختلاف نوع السكري، ولكن الهدف الأساسي هو الحفاظ على مستويات السكر في الدم ضمن النطاق الطبيعي.</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-3">
+                    <li data-i18n="treat1">المراقبة المستمرة لمستويات السكر.</li>
+                    <li data-i18n="treat2">العلاج بالأنسولين (ضروري للنوع الأول وبعض حالات النوع الثاني).</li>
+                    <li data-i18n="treat3">الأدوية الفموية التي تساعد الجسم على استخدام الأنسولين أو تقليل السكر.</li>
+                    <li data-i18n="treat4">التغذية الصحية وحساب الكربوهيدرات.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 7. نافذة: الوقاية -->
+        <section id="prevention" class="section-content fade-in">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+                <h2 class="text-2xl font-bold text-blue-900 mb-4" data-i18n="nav-prevention">الوقاية من السكري</h2>
+                <p class="text-gray-700 mb-4" data-i18n="prev-p1">في حين أنه لا يمكن الوقاية من النوع الأول، إلا أن النوع الثاني يمكن تأخيره أو منعه باتباع خطوات بسيطة:</p>
+                <div class="grid md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                        <strong class="text-green-800" data-i18n="prev-step1">الغذاء الصحي:</strong>
+                        <p class="text-sm text-gray-700 mt-1" data-i18n="prev-desc1">التركيز على الخضروات، الفواكه، والحبوب الكاملة وتقليل السكريات والدهون.</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                        <strong class="text-green-800" data-i18n="prev-step2">النشاط البدني:</strong>
+                        <p class="text-sm text-gray-700 mt-1" data-i18n="prev-desc2">ممارسة الرياضة لمدة 30 دقيقة معظم أيام الأسبوع.</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                        <strong class="text-green-800" data-i18n="prev-step3">الوزن المثالي:</strong>
+                        <p class="text-sm text-gray-700 mt-1" data-i18n="prev-desc3">فقدان 5% إلى 10% من وزن الجسم إذا كنت تعاني من زيادة الوزن.</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                        <strong class="text-green-800" data-i18n="prev-step4">الفحص الدوري:</strong>
+                        <p class="text-sm text-gray-700 mt-1" data-i18n="prev-desc4">إجراء فحوصات السكر بانتظام خاصة إذا كان هناك تاريخ عائلي.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- الفوتر (تذييل الصفحة) -->
+    <footer class="bg-white border-t mt-12 py-6 text-center text-gray-500 text-sm">
+        <p data-i18n="footer-text">© 2026 التوعية بمرض السكري - هذا الموقع للتوعية العامة ولا يغني عن الاستشارة الطبية المتخصصة.</p>
+    </footer>
+
+    <!-- سكربت التحكم بالموقع (التنقل + الترجمة) -->
+    <script>
+        // 1. نظام التنقل بين النوافذ (SPA)
+        function showSection(sectionId) {
+            // إخفاء جميع الأقسام
+            document.querySelectorAll('.section-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            // إظهار القسم المطلوب
+            document.getElementById(sectionId).classList.add('active');
+            
+            // تغيير لون الزر النشط في القائمة العلوية
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-blue-600', 'font-bold');
+                btn.classList.add('text-gray-600');
+            });
+            let activeBtn = document.querySelector(`.nav-btn[data-target="${sectionId}"]`);
+            if(activeBtn) {
+                activeBtn.classList.remove('text-gray-600');
+                activeBtn.classList.add('text-blue-600', 'font-bold');
+            }
+            
+            // العودة لأعلى الصفحة بسلاسة
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 2. نظام التبديل بين اللغتين (عربي/إنجليزي)
+        let currentLang = 'ar';
+        const translations = {
+            en: {
+                "nursing-college": "College of Nursing",
+                "nav-home": "Home",
+                "nav-what-is": "What is Diabetes?",
+                "nav-types": "Types",
+                "nav-causes": "Causes",
+                "nav-symptoms": "Symptoms",
+                "nav-treatment": "Treatment",
+                "nav-prevention": "Prevention",
+                "home-title": "Comprehensive Diabetes Awareness Guide",
+                "home-subtitle": "Towards a healthy and informed life, discover the essential information for prevention and living safely.",
+                
+                "mission-title": "Our Mission",
+                "mission-text": "From the classroom to community service; this website was designed by 'Community Health Nursing' students as a graduation project embodying our awareness mission. Through it, we strive to provide the necessary knowledge to support prevention and early understanding of diabetes, because your awareness today is immunity for your health tomorrow.",
+
+                "where-to-start": "Where would you like to start?",
+                "card1-title": "What is Diabetes?",
+                "card1-desc": "A simple definition of diabetes and how food turns into energy.",
+                "card2-title": "Types",
+                "card2-desc": "A clear explanation of Type 1, Type 2, and Gestational Diabetes.",
+                "card3-title": "Causes & Risks",
+                "card3-desc": "Genetic factors and lifestyle factors that increase the risk.",
+                "card4-title": "Symptoms",
+                "card4-desc": "Early warning signs that are worth paying attention to.",
+                "card5-title": "Treatment",
+                "card5-desc": "Medications, monitoring, nutrition, and daily management.",
+                "card6-title": "Prevention",
+                "card6-desc": "Practical habits to reduce your risk for life.",
+                "read-more": "Read More &rarr;",
+                "video-title": "Ministry of Health Awareness Video",
+                
+                "whatis-p1": "Diabetes is a chronic health condition that affects how your body turns food into energy. Your body breaks down most of the food you eat into sugar (glucose) and releases it into your bloodstream.",
+                "whatis-p2": "When your blood sugar goes up, it signals your pancreas to release insulin. Insulin acts like a key to let the blood sugar into your body’s cells for use as energy. With diabetes, your body doesn’t make enough insulin or can’t use it as well as it should.",
+                
+                "type1-title": "Type 1",
+                "type1-desc": "Thought to be an autoimmune reaction that stops your body from making insulin. Often diagnosed in children and teens.",
+                "type2-title": "Type 2",
+                "type2-desc": "The most common type, where your body doesn’t use insulin well. Often related to lifestyle and weight.",
+                "type3-title": "Gestational",
+                "type3-desc": "Develops in pregnant women who have never had diabetes, and increases the risk of Type 2 later.",
+                
+                "cause1": "Overweight and obesity.",
+                "cause2": "Physical inactivity.",
+                "cause3": "Family history and genetics.",
+                "cause4": "Age (risk increases as you get older).",
+                "cause5": "High blood pressure and cholesterol.",
+                
+                "symp-main-title": "Early Symptoms and Warning Signs",
+                "symp-subtitle": "Symptoms can develop slowly and be easy to miss. If several of these appear together, it is worth speaking to a doctor.",
+                "symp1": "Excessive thirst and a persistent dry mouth",
+                "symp2": "Frequent urination, especially waking at night",
+                "symp3": "Persistent fatigue that doesn't match your effort",
+                "symp4": "Temporary blurred vision",
+                "symp5": "Sudden, unexplained weight loss (common in Type 1)",
+                "symp6": "Cuts and wounds that heal slowly",
+                "symp-alert": "Note: These signs alone do not confirm diabetes - a blood test is the only way to diagnose, but they are a clear signal to get checked.",
+
+                "treat-p1": "Treatment varies depending on the type of diabetes, but the main goal is to keep blood sugar levels within a normal range.",
+                "treat1": "Continuous blood sugar monitoring.",
+                "treat2": "Insulin therapy (necessary for Type 1 and some Type 2 cases).",
+                "treat3": "Oral medications that help the body use insulin or lower sugar.",
+                "treat4": "Healthy nutrition and carbohydrate counting.",
+                
+                "prev-p1": "While Type 1 cannot be prevented, Type 2 can be delayed or prevented by following simple steps:",
+                "prev-step1": "Healthy Diet:",
+                "prev-desc1": "Focus on vegetables, fruits, and whole grains, and reduce sugars and fats.",
+                "prev-step2": "Physical Activity:",
+                "prev-desc2": "Exercise for 30 minutes most days of the week.",
+                "prev-step3": "Ideal Weight:",
+                "prev-desc3": "Lose 5% to 10% of your body weight if you are overweight.",
+                "prev-step4": "Regular Checkups:",
+                "prev-desc4": "Regular blood sugar tests, especially if there is a family history.",
+                
+                "footer-text": "© 2026 Diabetes Awareness - This site is for general awareness only and is not a substitute for professional medical advice."
+            },
+            ar: {
+                "nursing-college": "كلية التمريض",
+                "nav-home": "الرئيسية",
+                "nav-what-is": "ما هو السكري؟",
+                "nav-types": "الأنواع",
+                "nav-causes": "الأسباب",
+                "nav-symptoms": "الأعراض",
+                "nav-treatment": "العلاج",
+                "nav-prevention": "الوقاية",
+                "home-title": "الدليل الشامل للتوعية بمرض السكري",
+                "home-subtitle": "نحو حياة صحية وواعية، اكتشف المعلومات الأساسية للوقاية والتعايش بأمان.",
+                
+                "mission-title": "رسالتنا",
+                "mission-text": "من مقاعد الدراسة إلى خدمة المجتمع؛ صُمم هذا الموقع بيد طلاب مادة 'تمريض صحة المجتمع' كتكليف تخرج يجسد رسالتنا التوعوية. نسعى من خلاله لتقديم المعرفة اللازمة لدعم الوقاية والفهم المبكر لمرض السكري، لأن وعيك اليوم هو حصانة لصحتك غداً.",
+
+                "where-to-start": "من أين تحب أن تبدأ؟",
+                "card1-title": "ما هو السكري؟",
+                "card1-desc": "تعريف بسيط للسكري وكيف يتحول الطعام إلى طاقة.",
+                "card2-title": "الأنواع",
+                "card2-desc": "شرح واضح للنوع الأول والثاني وسكري الحمل.",
+                "card3-title": "الأسباب وعوامل الخطر",
+                "card3-desc": "العوامل الوراثية وعوامل نمط الحياة التي ترفع خطر الإصابة.",
+                "card4-title": "الأعراض",
+                "card4-desc": "علامات الإنذار المبكرة التي تستحق الانتباه.",
+                "card5-title": "العلاج",
+                "card5-desc": "الأدوية والمتابعة والتغذية والإدارة اليومية.",
+                "card6-title": "الوقاية",
+                "card6-desc": "عادات عملية تقلل خطر إصابتك مدى الحياة.",
+                "read-more": "اقرأ المزيد &larr;",
+                "video-title": "فيديو توعوي من وزارة الصحة",
+                
+                "whatis-p1": "مرض السكري هو حالة صحية مزمنة تؤثر على كيفية تحويل الجسم للطعام إلى طاقة. يكسر جسمك معظم الطعام الذي تتناوله إلى سكر (جلوكوز) ويطلقه في مجرى الدم.",
+                "whatis-p2": "عندما يرتفع مستوى السكر في الدم، يرسل إشارة للبنكرياس لإفراز الأنسولين. الأنسولين يعمل كمفتاح للسماح للسكر في الدم بالدخول إلى خلايا الجسم لاستخدامه كطاقة. في حالة مرض السكري، لا يصنع الجسم ما يكفي من الأنسولين أو لا يستطيع استخدامه بشكل جيد.",
+                
+                "type1-title": "النوع الأول",
+                "type1-desc": "يعتقد أنه تفاعل مناعي ذاتي يمنع الجسم من إنتاج الأنسولين. يتم تشخيصه غالباً عند الأطفال والمراهقين.",
+                "type2-title": "النوع الثاني",
+                "type2-desc": "النوع الأكثر شيوعاً، حيث لا يستخدم الجسم الأنسولين بشكل جيد. يرتبط غالباً بنمط الحياة والوزن.",
+                "type3-title": "سكري الحمل",
+                "type3-desc": "يحدث لدى النساء الحوامل اللاتي لم يسبق لهن الإصابة بالسكري، ويزيد من خطر الإصابة بالنوع الثاني لاحقاً.",
+                
+                "cause1": "زيادة الوزن والسمنة المفرطة.",
+                "cause2": "الخمول وقلة النشاط البدني.",
+                "cause3": "التاريخ العائلي والوراثة.",
+                "cause4": "العمر (يزداد الخطر مع تقدم العمر).",
+                "cause5": "ارتفاع ضغط الدم ونسبة الكوليسترول.",
+                
+                "symp-main-title": "الأعراض المبكرة وعلامات التحذير",
+                "symp-subtitle": "قد تتطور الأعراض ببطء ويسهل تجاهلها. إذا ظهرت عدة من هذه العلامات معاً، يُنصح بشدة بمراجعة الطبيب.",
+                "symp1": "العطش المفرط وجفاف الفم المستمر",
+                "symp2": "كثرة التبول، خاصة الاستيقاظ ليلاً",
+                "symp3": "التعب المستمر الذي لا يتناسب مع المجهود",
+                "symp4": "تشوش أو ضبابية مؤقتة في الرؤية",
+                "symp5": "فقدان مفاجئ وغير مبرر للوزن (شائع في النوع الأول)",
+                "symp6": "الجروح والخدوش التي تلتئم ببطء",
+                "symp-alert": "ملاحظة: هذه العلامات بمفردها لا تؤكد الإصابة بالسكري - فحص الدم هو الوسيلة الوحيدة للتشخيص، لكنها إشارة واضحة لضرورة الفحص.",
+
+                "treat-p1": "يختلف العلاج باختلاف نوع السكري، ولكن الهدف الأساسي هو الحفاظ على مستويات السكر في الدم ضمن النطاق الطبيعي.",
+                "treat1": "المراقبة المستمرة لمستويات السكر.",
+                "treat2": "العلاج بالأنسولين (ضروري للنوع الأول وبعض حالات النوع الثاني).",
+                "treat3": "الأدوية الفموية التي تساعد الجسم على استخدام الأنسولين أو تقليل السكر.",
+                "treat4": "التغذية الصحية وحساب الكربوهيدرات.",
+                
+                "prev-p1": "في حين أنه لا يمكن الوقاية من النوع الأول، إلا أن النوع الثاني يمكن تأخيره أو منعه باتباع خطوات بسيطة:",
+                "prev-step1": "الغذاء الصحي:",
+                "prev-desc1": "التركيز على الخضروات، الفواكه، والحبوب الكاملة وتقليل السكريات والدهون.",
+                "prev-step2": "النشاط البدني:",
+                "prev-desc2": "ممارسة الرياضة لمدة 30 دقيقة معظم أيام الأسبوع.",
+                "prev-step3": "الوزن المثالي:",
+                "prev-desc3": "فقدان 5% إلى 10% من وزن الجسم إذا كنت تعاني من زيادة الوزن.",
+                "prev-step4": "الفحص الدوري:",
+                "prev-desc4": "إجراء فحوصات السكر بانتظام خاصة إذا كان هناك تاريخ عائلي.",
+                
+                "footer-text": "© 2026 التوعية بمرض السكري - هذا الموقع للتوعية العامة ولا يغني عن الاستشارة الطبية المتخصصة."
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            
+            // تغيير اتجاه الصفحة
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            // تغيير النص في زر اللغة
+            document.getElementById('lang-toggle').innerText = currentLang === 'ar' ? 'English' : 'عربي';
+
+            // تطبيق الترجمة على جميع العناصر التي تحمل خاصية data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    // الحفاظ على الأيقونات (الأسهم) في البطاقات عند الترجمة
+                    if(key === 'read-more') {
+                        el.innerHTML = translations[currentLang][key];
+                    } else {
+                        el.innerText = translations[currentLang][key];
+                    }
+                }
+            });
+
+            // ضبط اتجاه شريط التنقل بناءً على اللغة
+            const navMenu = document.getElementById('nav-menu');
+            if (currentLang === 'en') {
+                navMenu.classList.remove('space-x-reverse');
+            } else {
+                navMenu.classList.add('space-x-reverse');
+            }
+        }
+    </script>
+</body>
+</html>
